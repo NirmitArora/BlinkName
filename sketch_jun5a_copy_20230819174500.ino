@@ -1,119 +1,122 @@
-const int ledPin = 13; // Led Pin Number
+const int LEDPin = 13;
+const int buttonpin = 2;
 
 void setup() {
-  pinMode(ledPin, OUTPUT);    // Setting the pin as OUTPUT pin
+  pinMode(LEDPin, OUTPUT);
+  pinMode(buttonpin, INPUT);
 }
 
 void loop() {
-  char msg[] = "NIRMIT"; // Storing The Name in An Array
-  int mesgLength = strlen(msg);
+  int buttonstate = digitalRead(buttonpin);
+  if (buttonstate == HIGH) {
+    char Name[] = "NIRMIT";  // Storing The Name in An Array
+    int NameLength = strlen(Name);
 
-  for (int i = 0; i < mesgLength; i++) {     // Running the Loop Throughout the length of the array
-    char x = toupper(msg[i]);           // Convert character to uppercase
+    for (int i = 0; i < NameLength; i++) {  // Running the Loop Throughout the length of the array
+      char x = toupper(Name[i]);            // Convert character to uppercase
 
-    switch (x) {
-      case 'A':
-        blinking_func(".-");
-        break;
-      case 'B':
-        blinking_func("....");
-        break;
-      case 'C':
-        blinking_func("-.-.");
-      case 'D':
-        blinking_func("-..");
-        break;
-      case 'E':
-        blinking_func(".");
-        break;
-      case 'F':
-        blinking_func("..-.");
-        break;
-      case 'G':
-        blinking_func("--.");
-        break;
-      case 'H':
-        blinking_func("....");
-        break;
-      case 'I':
-        blinking_func("..");
-        break;
-      case 'J':
-        blinking_func(".---");
-        break;
-      case 'K':
-        blinking_func("-.-");
-        break;
-      case 'L':
-        blinking_func(".-..");
-        break;
-      case 'M':
-        blinking_func("--");
-        break;
-      case 'N':
-        blinking_func("-.");
-        break;
-      case 'O':
-        blinking_func("---");
-        break;
-      case 'P':
-        blinking_func(".--.");
-        break;
-      case 'Q':
-        blinking_func("--.-");
-        break;
-      case 'R':
-        blinking_func(".-.");
-        break;
-      case 'S':
-        blinking_func("...");
-        break;
-      case 'T':
-        blinking_func("-");
-        break;
-      case 'U':
-        blinking_func("..-");
-        break;
-      case 'V':
-        blinking_func("...-");
-        break;
-      case 'W':
-        blinking_func(".--");
-        break;
-      case 'X':
-        blinking_func("-..-");
-        break;
-      case 'Y':
-        blinking_func("-.--");
-        break;
-      case 'Z':
-        blinking_func("--..");
-        break;
-      default:
-        delay(300);
-        break;
+      switch (x) {
+        case 'A':
+          Blink(".-");
+          break;
+        case 'B':
+          Blink("....");
+          break;
+        case 'C':
+          Blink("-.-.");
+        case 'D':
+          Blink("-..");
+          break;
+        case 'E':
+          Blink(".");
+          break;
+        case 'F':
+          Blink("..-.");
+          break;
+        case 'G':
+          Blink("--.");
+          break;
+        case 'H':
+          Blink("....");
+          break;
+        case 'I':
+          Blink("..");
+          break;
+        case 'J':
+          Blink(".---");
+          break;
+        case 'K':
+          Blink("-.-");
+          break;
+        case 'L':
+          Blink(".-..");
+          break;
+        case 'M':
+          Blink("--");
+          break;
+        case 'N':
+          Blink("-.");
+          break;
+        case 'O':
+          Blink("---");
+          break;
+        case 'P':
+          Blink(".--.");
+          break;
+        case 'Q':
+          Blink("--.-");
+          break;
+        case 'R':
+          Blink(".-.");
+          break;
+        case 'S':
+          Blink("...");
+          break;
+        case 'T':
+          Blink("-");
+          break;
+        case 'U':
+          Blink("..-");
+          break;
+        case 'V':
+          Blink("...-");
+          break;
+        case 'W':
+          Blink(".--");
+          break;
+        case 'X':
+          Blink("-..-");
+          break;
+        case 'Y':
+          Blink("-.--");
+          break;
+        case 'Z':
+          Blink("--..");
+          break;
+        default:
+          delay(300);
+          break;
+      }
+
+      delay(3000);  // Space between the letters
     }
-    
-    delay(3000); // Space between letters
   }
 
-  delay(1000); // Space between message repetitions
+  delay(1000);  // Space between the message repetitions
 }
 
-// Implementing The Function For Blinking
-void blinking_func(const char* Morsecode) {
-  for (int i = 0; Morsecode[i]; i++) {    // For Loop For Running Through the Morsecode
-    if (Morsecode[i] == '.') {            // For Running The DOT Method
-      digitalWrite(ledPin, HIGH);       // Setting the pin as High
+void Blink(const char* Morsecode) {
+  for (int i = 0; Morsecode[i]; i++) {  // For Loop For Running Through the Morsecode
+    if (Morsecode[i] == '.') {          // For Running The DOT Method
+      digitalWrite(LEDPin, HIGH);       // Setting the pin as High
       delay(500);
-      digitalWrite(ledPin, LOW);        // Setting the pin as Low
-      delay(400);
-    } 
-    else if (Morsecode[i] == '-') {       // For Running The DASH Method
-      digitalWrite(ledPin, HIGH);         // Setting the pin as High
-      delay(1800);
-      digitalWrite(ledPin, LOW);        // Setting the pin as Low
-      delay(400);
+      digitalWrite(LEDPin, LOW);  // Setting the pin as Low
+      delay(500);
+    } else if (Morsecode[i] == '-') {  // For Running The DASH Method
+      digitalWrite(LEDPin, HIGH);      // Setting the pin as High
+      delay(1000);
+      digitalWrite(LEDPin, LOW);  // Setting the pin as Low
+      delay(600);
     }
   }
 }
